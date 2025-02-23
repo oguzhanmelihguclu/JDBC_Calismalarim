@@ -35,7 +35,12 @@ INSERT INTO categories (name, description) VALUES (?, ?);
 INSERT INTO cron_job_logs (id,cron_job_id,start_at,end_at) VALUES (?,?,?,?);
 INSERT INTO admin_password_resets (email, token, status, created_at) VALUES (?, ?, ?, ?);
 SELECT firstname, lastname FROM users WHERE country_code != 'TR' AND id = 11;
-SELECT COUNT(*) AS istenilen_sonuc FROM admin_notifications WHERE user_id = 1 AND is_read = 0;]]></console>
+SELECT COUNT(*) AS istenilen_sonuc FROM admin_notifications WHERE user_id = 1 AND is_read = 0;
+SELECT SUM(amount) AS toplam_tutar, COUNT(*) AS deposits_sayisi FROM deposits WHERE status = 1 AND created_at BETWEEN '2025-01-01' AND '2025-01-31';
+DELETE FROM update_logs WHERE id = 3;
+SELECT * FROM update_logs;
+UPDATE pages SET name = 'oguz' WHERE id = 4;
+INSERT INTO pages (name, slug, tempname, secs, is_default, created_at, updated_at) VALUES (?,?,?,?,?,?,?);]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

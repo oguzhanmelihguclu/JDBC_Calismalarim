@@ -15,6 +15,13 @@ public class QueryManage {
     private String adminPasswordResetIntoQuery="INSERT INTO admin_password_resets (email, token, status, created_at) VALUES (?, ?, ?, ?)";
     private String usersFirstnameLastnameQuery="SELECT firstname, lastname FROM users WHERE country_code != 'TR' AND id = 11;";
     private String adminNotificationsQuery="SELECT COUNT(*) AS istenilen_sonuc FROM admin_notifications WHERE user_id = 1 AND is_read = 0;";
+    private String depositsQuery="SELECT SUM(amount) AS toplam_tutar, COUNT(*) AS deposits_sayisi FROM deposits WHERE status = 1 AND created_at BETWEEN '2025-01-01' AND '2025-01-31';";
+    private String pagesDeleteQuery="DELETE FROM pages WHERE id = 1;";
+    private String pagesUptadeQuery="UPDATE pages SET name = ? WHERE id = 4;";
+    private String pagesIntoQuery="INSERT INTO pages (name, slug, tempname, secs, is_default, created_at, updated_at) VALUES (?,?,?,?,?,?,?);";
+
+
+
 
     // ************ GETTERS **************
     public String getCroneSchedulesQuery() {
@@ -63,5 +70,21 @@ public class QueryManage {
     public String getAdminNotificationsQuery() {
         return adminNotificationsQuery;
     }
+
+    public String getDepositsQuery() {
+        return depositsQuery;
+    }
+
+    public String getPagesDeleteQuery() {
+        return pagesDeleteQuery;
+    }
+    public String getPagesUptadeQuery() {
+        return pagesUptadeQuery;
+    }
+    public String getPagesIntoQuery() {
+        return pagesIntoQuery;
+    }
+
+
 
 }

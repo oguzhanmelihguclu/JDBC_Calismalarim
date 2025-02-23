@@ -461,7 +461,108 @@ public class stepDefinitions {
 
     }
 
+    @Given("Database baglantisi kurulur\\(Team148).")
+    public void database_baglantisi_kurulur_team148() {
 
+        JDBCReusableMethods.createConnection();
+
+    }
+    @Given("\\(DB_US23) SQL Query hazirlanir ve calistilir.")
+    public void db_us23_sql_query_hazirlanir_ve_calistilir() {
+
+        QUERY = queryManage.getDepositsQuery();
+        resultSet=JDBCReusableMethods.executeQuery(QUERY);
+
+    }
+    @Given("\\(DB_US23) dogrulanir.")
+    public void db_us23_dogrulanir() throws SQLException {
+
+        List<Double> expectedResultList=new ArrayList<>();
+
+        expectedResultList.add(22343.5);
+        expectedResultList.add(22.0);
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(expectedResultList);
+
+        List<Double> actualResultList=new ArrayList<>();
+        while (resultSet.next()) {
+
+            actualResultList.add(resultSet.getDouble(1));
+            actualResultList.add(resultSet.getDouble(2));
+        }
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(actualResultList);
+
+
+        assertEqualsNoOrder(actualResultList,expectedResultList);
+
+    }
+    @Given("Database baglantisi sonlandir\\(Team148).")
+    public void database_baglantisi_sonlandir_team148() {
+
+        JDBCReusableMethods.closeConnection();
+
+    }
+
+    @Given("\\(DB_US29) SQL Query calismasi hazirlanir ve calistilir.")
+    public void db_us29_sql_query_calismasi_hazirlanir_ve_calistilir() {
+        QUERY = queryManage.getPagesDeleteQuery();
+        etkilenenSatirSayisi=JDBCReusableMethods.updateQuery(QUERY);
+
+        int expectedEtkilenenSatirSayisi=1;
+
+        assertEquals(etkilenenSatirSayisi,expectedEtkilenenSatirSayisi);
+
+    }
+
+    @Given("\\(DB_US28) SQL Query hazirlanir ve calistilir.")
+    public void db_us28_sql_query_hazirlanir_ve_calistilir() throws SQLException {
+
+        QUERY = queryManage.getPagesUptadeQuery();
+        preparedStatement=JDBCReusableMethods.getConnection().prepareStatement(QUERY);
+
+        preparedStatement.setString(1,"oguzhan");
+        etkilenenSatirSayisi=preparedStatement.executeUpdate();
+
+
+
+
+
+    }
+    @Given("\\(DB_US28) dogrulanir.")
+    public void db_us28_dogrulanir() {
+
+        int expectedEtkilenSatir=1;
+
+        assertEquals(etkilenenSatirSayisi,expectedEtkilenSatir);
+
+    }
+
+    @Given("\\(DB_US31) SQL Query hazirlanir ve calistilir.")
+    public void db_us31_sql_query_hazirlanir_ve_calistilir() throws SQLException {
+
+        QUERY = queryManage.getPagesIntoQuery();
+        preparedStatement=JDBCReusableMethods.getConnection().prepareStatement(QUERY);
+
+
+        preparedStatement.setString(1,"Example Page");
+        preparedStatement.setString(2,"example-page");
+        preparedStatement.setString(3,"example-temp");
+        preparedStatement.setString(4,"Sample section data");
+        preparedStatement.setInt(5,1);
+        preparedStatement.setString(6,"2025-02-23 12:00:00");
+        preparedStatement.setString(7,"2025-02-23 12:00:00");
+
+        etkilenenSatirSayisi=preparedStatement.executeUpdate();
+
+
+    }
+    @Given("\\(DB_US31) dogrulanir.")
+    public void db_us31_dogrulanir() {
+
+        int expectedEtkilenenSatirSayisi=1;
+
+        assertEquals(etkilenenSatirSayisi,expectedEtkilenenSatirSayisi);
+
+    }
 
 
 
