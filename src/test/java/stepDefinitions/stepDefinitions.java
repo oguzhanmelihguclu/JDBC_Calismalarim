@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.Given;
+import io.cucumber.java.sl.In;
 import manage.QueryManage;
 import utilities.ConfigReader;
 import utilities.JDBCReusableMethods;
@@ -561,6 +562,60 @@ public class stepDefinitions {
         int expectedEtkilenenSatirSayisi=1;
 
         assertEquals(etkilenenSatirSayisi,expectedEtkilenenSatirSayisi);
+
+    }
+
+    @Given("\\(DB_US21) SQL Query hazirlanir ve calistirilir.")
+    public void db_us21_sql_query_hazirlanir_ve_calistirilir() {
+
+        QUERY=queryManage.getAdminNotificationSelectQuery();
+        resultSet=JDBCReusableMethods.executeQuery(QUERY);
+
+    }
+    @Given("\\(DB_US21) dogrulanir.")
+    public void db_us21_dogrulanir() throws SQLException {
+
+        List<Integer> expectedResultList=new ArrayList<>();
+        expectedResultList.add(1);
+
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(expectedResultList);
+
+        List<Integer> actualResultList=new ArrayList<>();
+        while (resultSet.next()) {
+            actualResultList.add(resultSet.getInt(1));
+        }
+
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(actualResultList);
+
+        assertEquals(actualResultList,expectedResultList);
+
+    }
+
+    @Given("\\(DB_US27) SQL Query hazirlanir ve calistirilir.")
+    public void db_us27_sql_query_hazirlanir_ve_calistirilir() {
+
+        QUERY = queryManage.getLoanPlansSelectQuery();
+        resultSet=JDBCReusableMethods.executeQuery(QUERY);
+
+    }
+    @Given("\\(DB_US27) dogrulanir.")
+    public void db_us27_dogrulanir() throws SQLException {
+
+        List<String> expectedResultList=new ArrayList<>();
+        expectedResultList.add("Basic Loan 1");
+        expectedResultList.add("Basic Loan 2");
+        expectedResultList.add("Basic Loan 2");
+
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(expectedResultList);
+
+        List<String> actualResultList=new ArrayList<>();
+        while (resultSet.next()) {
+            actualResultList.add(resultSet.getString(1));
+        }
+
+        JDBCReusableMethods.ListeyiYazdirmaMethodu(actualResultList);
+
+        assertEqualsNoOrder(actualResultList,expectedResultList);
 
     }
 

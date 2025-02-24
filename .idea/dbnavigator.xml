@@ -40,7 +40,9 @@ SELECT SUM(amount) AS toplam_tutar, COUNT(*) AS deposits_sayisi FROM deposits WH
 DELETE FROM update_logs WHERE id = 3;
 SELECT * FROM update_logs;
 UPDATE pages SET name = 'oguz' WHERE id = 4;
-INSERT INTO pages (name, slug, tempname, secs, is_default, created_at, updated_at) VALUES (?,?,?,?,?,?,?);]]></console>
+INSERT INTO pages (name, slug, tempname, secs, is_default, created_at, updated_at) VALUES (?,?,?,?,?,?,?);
+SELECT COUNT(*) AS toplam_sayi FROM admin_notifications  WHERE is_read = 1 AND user_id = 1;
+SELECT name FROM loan_plans WHERE delay_value IS NOT NULL AND (fixed_charge IS NOT NULL OR percent_charge IS NOT NULL) LIMIT 3;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -96,7 +98,7 @@ INSERT INTO pages (name, slug, tempname, secs, is_default, created_at, updated_a
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <session-user value="u201212290_qaloanuser@78.167.6.176" />
+          <session-user value="u201212290_qaloanuser@88.239.153.228" />
         </database>
         <properties>
           <auto-commit value="false" />
